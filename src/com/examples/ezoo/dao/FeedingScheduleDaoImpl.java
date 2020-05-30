@@ -10,8 +10,10 @@ import java.util.List;
 import com.examples.ezoo.model.Animal;
 import com.examples.ezoo.model.FeedingSchedule;
 
-public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 
+public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
+	
+	
 	@Override
 	public void saveFeedingSchedule(FeedingSchedule feedingScheduleToSave) throws Exception {
 		// TODO Auto-generated method stub
@@ -31,7 +33,9 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 		Statement stmt = null;
 		
 		try {
+			
 			connection = DAOUtilities.getConnection();
+			
 			
 			stmt = connection.createStatement();
 			

@@ -11,8 +11,8 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<junit.jupiter.version>5.2.0</junit.jupiter.version>
 		<java.version>1.8</java.version>
+		<log4j.version>2.13.3</log4j.version>
 	</properties>
 
 	<dependencies>
@@ -21,20 +21,32 @@
 			<artifactId>jboss-servlet-api_4.0_spec</artifactId>
 			<version>2.0.0.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+			<version>2.7.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.200</version>
+			<scope>test</scope>
+		</dependency>
 
 		<dependency>
-  			<groupId>junit</groupId>
-  			<artifactId>junit</artifactId>
-  			<version>4.12</version>
-  			<scope>test</scope>
-  		</dependency>
-  		<dependency>
-  			<groupId>org.mockito</groupId>
-  			<artifactId>mockito-all</artifactId>
-  			<version>1.10.19</version>
-  			<scope>test</scope>
-  		</dependency>
-    	<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.10.19</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-api-mockito</artifactId>
 			<version>1.6.4</version>
@@ -47,15 +59,15 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-   			<groupId>org.junit.platform</groupId>
-		    <artifactId>junit-platform-runner</artifactId>
-    		<version>1.2.0</version>
-    		<scope>test</scope>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-runner</artifactId>
+			<version>1.2.0</version>
+			<scope>test</scope>
 		</dependency>
-		
+
 
 	</dependencies>
-	
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>

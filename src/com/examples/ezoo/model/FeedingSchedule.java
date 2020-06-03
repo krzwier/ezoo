@@ -52,6 +52,40 @@ public class FeedingSchedule {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FeedingSchedule other = (FeedingSchedule) obj;
+		if (feeding_time == null) {
+			if (other.feeding_time != null)
+				return false;
+		} else if (!feeding_time.equals(other.feeding_time))
+			return false;
+		if (food == null) {
+			if (other.food != null)
+				return false;
+		} else if (!food.equals(other.food))
+			return false;
+		if (notes == null) {
+			if (other.notes != null)
+				return false;
+		} else if (!notes.equals(other.notes))
+			return false;
+		if (recurrence == null) {
+			if (other.recurrence != null)
+				return false;
+		} else if (!recurrence.equals(other.recurrence))
+			return false;
+		if (schedule_ID != other.schedule_ID)
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		return "FeedingSchedule [schedule_ID=" + schedule_ID + ", feeding_time=" + feeding_time + ", recurrence="
 				+ recurrence + ", food=" + food + ", notes=" + notes + "]";

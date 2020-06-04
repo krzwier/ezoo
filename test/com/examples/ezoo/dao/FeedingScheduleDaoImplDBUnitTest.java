@@ -4,6 +4,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import javax.sql.DataSource;
 
 import org.dbunit.Assertion;
 import org.dbunit.DataSourceBasedDBTestCase;
+import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
@@ -102,6 +104,27 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 
 		assertEquals(expectedList, result);
 
+	}
+	
+	@Test
+	public void saveFeedingSchedule_givenFeedingSchedule_InsertRecord() throws Exception {
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("afterInsert.xml");
+		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(inputStream);
+		ITable expectedTable = expectedDataSet.getTable("feeding_schedules");
+		
+		FeedingSchedule fs = new FeedingSchedule(103, "1pm", "daily", "Backyard Basics", "Helps chickens survive even though they prefer grubs and scratch.");
+		
+		PowerMockito.mockStatic(DAOUtilities.class);
+		when(DAOUtilities.getConnection()).thenReturn(connection);
+		
+		fsdi.saveFeedingSchedule(fs);
+		
+		IDataSet databaseDataSet = getConnection().createDataSet();
+		ITable actualTable = databaseDataSet.getTable("feeding_schedules");
+		
+		Assertion.assertEquals(expectedTable, actualTable);
+		
+	
 	}
 	
 	

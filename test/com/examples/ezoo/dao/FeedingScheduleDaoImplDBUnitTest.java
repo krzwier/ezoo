@@ -2,13 +2,9 @@ package com.examples.ezoo.dao;
 
 import static org.mockito.Mockito.when;
 
-//import static org.mockito.Mockito.when;
-
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.ArrayList;
-//import java.util.ArrayList;
-//import java.util.List;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -22,30 +18,19 @@ import org.dbunit.operation.DatabaseOperation;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
-//import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 import org.powermock.api.mockito.PowerMockito;
-//import org.junit.runner.RunWith;
-//import org.powermock.api.mockito.PowerMockito;
-//import org.powermock.core.classloader.annotations.PrepareForTest;
-//import org.powermock.modules.junit4.PowerMockRunner;
-//import org.powermock.modules.junit4.rule.PowerMockRule;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-//import org.powermock.modules.junit4.rule.PowerMockRule;
+
 
 import com.examples.ezoo.model.FeedingSchedule;
 
-//@RunWith(JUnit4.class)
+
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(DAOUtilities.class)
 public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase {
-
-	//@Rule
-	//public PowerMockRule rule = new PowerMockRule();
 	
 	private Connection connection;
 	
@@ -102,7 +87,6 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 	@Test
 	public void getAllFeedingSchedules_TestDataSet_ReturnList() throws Exception {
 
-		
 		FeedingSchedule fs1 = new FeedingSchedule(101,"8am", "Weekly on Sundays","Steak","Carnivores are super happy to eat steak.");
 		FeedingSchedule fs2 = new FeedingSchedule(102,"10am", "daily","kibble",null);
 		
@@ -110,14 +94,12 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 		expectedList.add(fs1);
 		expectedList.add(fs2);
 
-		// this preparation is needed before any mock of a static method
+		// preparation for mocking static method
 		PowerMockito.mockStatic(DAOUtilities.class);
 		when(DAOUtilities.getConnection()).thenReturn(connection);
 
-		// act
 		List<FeedingSchedule> result = fsdi.getAllFeedingSchedules();
 
-		// assert
 		assertEquals(expectedList, result);
 
 	}

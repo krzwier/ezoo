@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS feeding_schedules
     `feeding_time` varchar(100) NOT NULL,
     `recurrence` varchar(100) NOT NULL,
     `food` varchar(100) NOT NULL,
-    `notes` varchar(100),
+    `notes` varchar(1000),
     CONSTRAINT feeding_schedules_pkey PRIMARY KEY (schedule_id)
 );
 

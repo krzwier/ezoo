@@ -1,6 +1,7 @@
 package com.examples.ezoo.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,7 +17,42 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 	
 	@Override
 	public void saveFeedingSchedule(FeedingSchedule feedingScheduleToSave) throws Exception {
-		// TODO Auto-generated method stub
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		int success = 0;
+		
+		try {
+			connection = DAOUtilities.getConnection();
+			
+			String sql = "INSERT INTO feeding_schedules VALUES (?,?,?,?,?)";
+			
+			stmt = connection.prepareStatement(sql);
+			stmt.setLong(1,feedingScheduleToSave.getSchedule_ID());
+			stmt.setString(2, feedingScheduleToSave.getFeeding_time());
+			stmt.setString(3, feedingScheduleToSave.getRecurrence());
+			stmt.setString(4, feedingScheduleToSave.getFood());
+			stmt.setString(5, feedingScheduleToSave.getNotes());
+			
+			success = stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			if (success == 0) {
+				// then update didn't occur, throw an exception
+				throw new Exception("Insert feeding schedule failed:" + feedingScheduleToSave);
+			}
+		}
+		
 		
 	}
 

@@ -124,7 +124,26 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 		
 		Assertion.assertEquals(expectedTable, actualTable);
 		
+	}
 	
+	@Test
+	public void deleteFeedingSchedule_FeedingScheduleExistsInDatabase_RecordDeleted() throws Exception {
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("afterDelete.xml");
+		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(inputStream);
+		ITable expectedTable = expectedDataSet.getTable("feeding_schedules");
+		
+		FeedingSchedule fs = new FeedingSchedule(102,"10am", "daily","kibble",null);
+		
+		PowerMockito.mockStatic(DAOUtilities.class);
+		when(DAOUtilities.getConnection()).thenReturn(connection);
+		
+		fsdi.deleteFeedingSchedule(fs);
+		
+		IDataSet databaseDataSet = getConnection().createDataSet();
+		ITable actualTable = databaseDataSet.getTable("feeding_schedules");
+		
+		Assertion.assertEquals(expectedTable, actualTable);
+		
 	}
 	
 	

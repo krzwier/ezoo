@@ -53,7 +53,6 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 			}
 		}
 		
-		
 	}
 
 	@Override

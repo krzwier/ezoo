@@ -186,21 +186,21 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 
 	}
 
-	/*
-	 * @Test(expected = IllegalArgumentException.class) public void
-	 * deleteFeedingSchedule_FeedingScheduleNotInDatabase_ThrowsException() throws
-	 * Exception { FeedingSchedule fs = new FeedingSchedule(102,"11am",
-	 * "daily","kibble",null);
-	 * 
-	 * PowerMockito.mockStatic(DAOUtilities.class);
-	 * when(DAOUtilities.getConnection()).thenReturn(connection);
-	 * 
-	 * fsdi.deleteFeedingSchedule(fs);
-	 * 
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
+	@Test
+	public void deleteFeedingSchedule_FeedingScheduleNotInDatabase_ThrowsException() throws Exception {
+		FeedingSchedule fs = new FeedingSchedule(105, "11am", "daily", "kibble", null);
+
+		PowerMockito.mockStatic(DAOUtilities.class);
+		when(DAOUtilities.getConnection()).thenReturn(connection);
+
+		Throwable thrown = catchThrowable(() -> {
+			fsdi.deleteFeedingSchedule(fs);
+		});
+		
+		assertThat(thrown)
+			.isInstanceOf(Exception.class)
+			.hasMessageMatching(".*Delete.*fail.*");
+
+	}
 
 }

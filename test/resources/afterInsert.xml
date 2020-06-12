@@ -18,6 +18,9 @@
 	<feeding_schedules schedule_id='103'
 		feeding_time='1pm' recurrence='daily' food='Backyard Basics'
 		notes='Helps chickens survive even though they prefer grubs and scratch.' />
+	<feeding_schedules schedule_id='104'
+		feeding_time='5pm' recurrence='daily' food='Hay'
+		notes='Elephants love to eat hay.' />
 
 
 

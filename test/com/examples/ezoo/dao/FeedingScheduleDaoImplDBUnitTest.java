@@ -1,13 +1,11 @@
 package com.examples.ezoo.dao;
 
-import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +13,6 @@ import javax.sql.DataSource;
 
 import org.dbunit.Assertion;
 import org.dbunit.DataSourceBasedDBTestCase;
-import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
@@ -24,7 +21,6 @@ import org.h2.jdbcx.JdbcDataSource;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -111,12 +107,6 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 
 	@Test
 	public void saveFeedingSchedule_feedingScheduleAlreadyInDatabase_ThrowsException() throws Exception {
-		/*
-		 * InputStream inputStream =
-		 * getClass().getClassLoader().getResourceAsStream("afterInsert.xml"); IDataSet
-		 * expectedDataSet = new FlatXmlDataSetBuilder().build(inputStream); ITable
-		 * expectedTable = expectedDataSet.getTable("feeding_schedules");
-		 */
 
 		FeedingSchedule fs = new FeedingSchedule(103, "1pm", "daily", "Backyard Basics",
 				"Helps chickens survive even though they prefer grubs and scratch.");
@@ -130,14 +120,26 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 
 		assertThat(thrown).isInstanceOf(Exception.class).hasMessageMatching(".*Insert.*fail.*");
 
-		/*
-		 * fsdi.saveFeedingSchedule(fs);
-		 * 
-		 * IDataSet databaseDataSet = getConnection().createDataSet(); ITable
-		 * actualTable = databaseDataSet.getTable("feeding_schedules");
-		 * 
-		 * Assertion.assertEquals(expectedTable, actualTable);
-		 */
+	}
+
+	@Test
+	public void saveFeedingSchedule_feedingScheduleNotAlreadyInDatabase_ThrowsException() throws Exception {
+
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("afterInsert.xml");
+		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(inputStream);
+		ITable expectedTable = expectedDataSet.getTable("feeding_schedules");
+
+		FeedingSchedule fs = new FeedingSchedule(104, "5pm", "daily", "Hay", "Elephants love to eat hay.");
+
+		PowerMockito.mockStatic(DAOUtilities.class);
+		when(DAOUtilities.getConnection()).thenReturn(connection);
+
+		fsdi.saveFeedingSchedule(fs);
+
+		IDataSet databaseDataSet = getConnection().createDataSet();
+		ITable actualTable = databaseDataSet.getTable("feeding_schedules");
+
+		Assertion.assertEquals(expectedTable, actualTable);
 
 	}
 

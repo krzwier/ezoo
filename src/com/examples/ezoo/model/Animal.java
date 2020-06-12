@@ -19,11 +19,13 @@ public class Animal{
 	private String type = "";
 	private String healthStatus = "";
 	
+	private int feedingSchedule = 0;
+	
 	public Animal(){}
 
 	public Animal(long animalID, String name, String taxKingdom, String taxPhylum, String taxClass, String taxOrder,
 			String taxFamily, String taxGenus, String taxSpecies, double height, double weight, String type,
-			String healthStatus) {
+			String healthStatus, int feedingSchedule) {
 		super();
 		this.animalID = animalID;
 		this.name = name;
@@ -38,6 +40,7 @@ public class Animal{
 		this.weight = weight;
 		this.type = type;
 		this.healthStatus = healthStatus;
+		this.feedingSchedule = feedingSchedule;
 	}
 
 	public long getAnimalID() {
@@ -82,6 +85,10 @@ public class Animal{
 
 	public String getTaxOrder() {
 		return taxOrder;
+	}
+	
+	public int getFeedingSchedule() {
+		return feedingSchedule;
 	}
 
 	public void setTaxOrder(String taxOrder) {
@@ -143,13 +150,17 @@ public class Animal{
 	public void setHealthStatus(String healthStatus) {
 		this.healthStatus = healthStatus;
 	}
+	
+	public void setFeedingSchedule(int feedingSchedule) {
+		this.feedingSchedule = feedingSchedule;
+	}
 
 	@Override
 	public String toString() {
 		return "Animal [animalID=" + animalID + ", name=" + name + ", taxKingdom=" + taxKingdom + ", taxPhylum="
 				+ taxPhylum + ", taxClass=" + taxClass + ", taxOrder=" + taxOrder + ", taxFamily=" + taxFamily
 				+ ", taxGenus=" + taxGenus + ", taxSpecies=" + taxSpecies + ", height=" + height + ", weight=" + weight
-				+ ", type=" + type + ", healthStatus=" + healthStatus + "]";
+				+ ", type=" + type + ", healthStatus=" + healthStatus + ", feedingSchedule=" + feedingSchedule + "]";
 	}
 	
 	

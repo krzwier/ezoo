@@ -45,9 +45,13 @@ public class AddAnimalServlet extends HttpServlet {
 		String type = request.getParameter("type");
 		String healthStatus = request.getParameter("healthStatus");
 		
+		
 		//Since request parameters are ALWAYS Strings we will convert them to Double
 		double height = Double.parseDouble(request.getParameter("height"));
 		double weight = Double.parseDouble(request.getParameter("weight"));
+		
+		int feedingSchedule = Integer.parseInt(request.getParameter("feedingSchedule"));
+
 		
 		//Create an Animal object from the parameters
 		Animal animalToSave = new Animal(
@@ -63,7 +67,8 @@ public class AddAnimalServlet extends HttpServlet {
 				height,
 				weight,
 				type,
-				healthStatus);
+				healthStatus,
+				feedingSchedule);
 		
 		//Call DAO method
 		AnimalDAO dao = DAOUtilities.getAnimalDao();

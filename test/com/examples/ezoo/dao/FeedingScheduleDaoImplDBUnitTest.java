@@ -26,6 +26,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import com.examples.ezoo.model.Animal;
 import com.examples.ezoo.model.FeedingSchedule;
 
 @RunWith(PowerMockRunner.class)
@@ -201,6 +202,25 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 			.isInstanceOf(Exception.class)
 			.hasMessageMatching(".*Delete.*fail.*");
 
+	}
+	
+	@Test
+	public void getFeedingSchedule_givenAnimalWithValidFeedingSchedule_ReturnsFeedingSchedule() throws Exception {
+		FeedingSchedule expectedFeedingSchedule = new FeedingSchedule(103, "1pm", "daily", "Backyard Basics",
+				"Helps chickens survive even though they prefer grubs and scratch.");
+		
+		Animal a = new Animal(2L, "Toosty", "Animalia", "Chordata", "Aves", "Galliformes",
+				"Phasianidae", "Gallus", "G. gallus", 30.00d, 3.00d, "Bird (Domestic)",
+				"Healthy", 103);
+		
+		PowerMockito.mockStatic(DAOUtilities.class);
+		when(DAOUtilities.getConnection()).thenReturn(connection);
+		
+		FeedingSchedule actualFeedingSchedule = fsdi.getFeedingSchedule(a);
+		
+		assertThat(actualFeedingSchedule).isEqualToComparingFieldByField(expectedFeedingSchedule);
+		
+		
 	}
 
 }

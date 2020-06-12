@@ -46,6 +46,7 @@ public class AnimalDaoImpl implements AnimalDAO {
 
 				a.setType(rs.getString("type"));
 				a.setHealthStatus(rs.getString("healthstatus"));
+				a.setFeedingSchedule(rs.getInt("feeding_schedule"));
 				
 				animals.add(a);
 			}
@@ -76,7 +77,7 @@ public class AnimalDaoImpl implements AnimalDAO {
 
 		try {
 			connection = DAOUtilities.getConnection();
-			String sql = "INSERT INTO ANIMALS VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO ANIMALS VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 			// Setup PreparedStatement
 			stmt = connection.prepareStatement(sql);
@@ -98,6 +99,7 @@ public class AnimalDaoImpl implements AnimalDAO {
 
 			stmt.setString(12, animal.getType());
 			stmt.setString(13, animal.getHealthStatus());
+			stmt.setLong(14, animal.getFeedingSchedule());
 			
 			success = stmt.executeUpdate();
 		} catch (SQLException e) {

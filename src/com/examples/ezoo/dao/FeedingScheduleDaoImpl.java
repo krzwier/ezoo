@@ -167,8 +167,53 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 
 	@Override
 	public FeedingSchedule getFeedingSchedule(Animal animal) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		int feedingScheduleID = animal.getFeedingSchedule();
+		FeedingSchedule fs = new FeedingSchedule();
+		
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			connection = DAOUtilities.getConnection();
+			
+			String sql = "SELECT * FROM feeding_schedules WHERE schedule_id = ?";
+			
+			stmt = connection.prepareStatement(sql);
+			
+			stmt.setInt(1,feedingScheduleID);
+	
+
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				// feeding schedule exists
+				fs.setSchedule_ID(rs.getInt("schedule_id"));
+				fs.setFeeding_time(rs.getString("feeding_time"));
+				fs.setRecurrence(rs.getString("recurrence"));
+				fs.setFood(rs.getString("food"));
+				fs.setNotes(rs.getString("notes"));
+
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return fs;
+
 	}
 
 	@Override

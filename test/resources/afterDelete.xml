@@ -13,6 +13,9 @@
 	<feeding_schedules schedule_id='101'
 		feeding_time='8am' recurrence='Weekly on Sundays' food='Steak'
 		notes='Carnivores are super happy to eat steak.' />
+	<feeding_schedules schedule_id='103'
+		feeding_time='1pm' recurrence='daily' food='Backyard Basics'
+		notes='Helps chickens survive even though they prefer grubs and scratch.' />
 
 
 </dataset>

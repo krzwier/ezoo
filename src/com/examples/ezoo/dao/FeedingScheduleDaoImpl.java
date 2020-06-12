@@ -66,12 +66,8 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 
 			if (feedingScheduleToDelete.getNotes() == null) {
 
-				String sql = "DELETE FROM feeding_schedules WHERE " + 
-						"schedule_id = ? AND " + 
-						"feeding_time = ? AND " + 
-						"recurrence = ? AND " + 
-						"food = ? AND " +
-						"notes IS NULL";
+				String sql = "DELETE FROM feeding_schedules WHERE " + "schedule_id = ? AND " + "feeding_time = ? AND "
+						+ "recurrence = ? AND " + "food = ? AND " + "notes IS NULL";
 				// + "notes = ? ";
 
 				stmt = connection.prepareStatement(sql);
@@ -80,10 +76,29 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 				stmt.setString(3, feedingScheduleToDelete.getRecurrence());
 				stmt.setString(4, feedingScheduleToDelete.getFood());
 				// stmt.setString(5, feedingScheduleToDelete.getNotes());
+			} else {
+				// notes field is not null
+
+				String sql = "DELETE FROM feeding_schedules WHERE " + 
+						"schedule_id = ? AND " + 
+						"feeding_time = ? AND " + 
+						"recurrence = ? AND " + 
+						"food = ? AND " + 
+						"notes = ?";
+
+				stmt = connection.prepareStatement(sql);
+				stmt.setLong(1, feedingScheduleToDelete.getSchedule_ID());
+				stmt.setString(2, feedingScheduleToDelete.getFeeding_time());
+				stmt.setString(3, feedingScheduleToDelete.getRecurrence());
+				stmt.setString(4, feedingScheduleToDelete.getFood());
+				stmt.setString(5, feedingScheduleToDelete.getNotes());
+
 			}
 
 			success = stmt.executeUpdate();
-		} catch (SQLException e) {
+		} catch (
+
+		SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {

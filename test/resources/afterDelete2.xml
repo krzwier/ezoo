@@ -10,9 +10,10 @@
 		taxfamily='Phasianidae' taxgenus='Gallus' taxspecies='G. gallus'
 		height='30.00' weight='3.00' type='Bird (Domestic)'
 		healthstatus='Healthy' feeding_schedule='102' />
-
+	<feeding_schedules schedule_id='101'
+		feeding_time='8am' recurrence='Weekly on Sundays' food='Steak'
+		notes='Carnivores are super happy to eat steak.' />
 	<feeding_schedules schedule_id='102'
 		feeding_time='10am' recurrence='daily' food='kibble' />
-
 
 </dataset>

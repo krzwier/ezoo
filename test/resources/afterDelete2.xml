@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<animals animalid='1' name='Leo' taxkingdom='Animalia'
+		taxphylum='Chordata' taxclass='Mammalia' taxorder='Carnivora'
+		taxfamily='Felidae' taxgenus='Panthera' taxspecies='P. leo'
+		height='120.88' weight='400.67' type='Mammal (Terrestrial)'
+		healthstatus='Healthy' feeding_schedule='101' />
+	<animals animalid='2' name='Toosty' taxkingdom='Animalia'
+		taxphylum='Chordata' taxclass='Aves' taxorder='Galliformes'
+		taxfamily='Phasianidae' taxgenus='Gallus' taxspecies='G. gallus'
+		height='30.00' weight='3.00' type='Bird (Domestic)'
+		healthstatus='Healthy' feeding_schedule='102' />
+
+	<feeding_schedules schedule_id='102'
+		feeding_time='10am' recurrence='daily' food='kibble' />
+
+
+</dataset>

@@ -10,6 +10,11 @@
 		taxfamily='Phasianidae' taxgenus='Gallus' taxspecies='G. gallus'
 		height='30.00' weight='3.00' type='Bird (Domestic)'
 		healthstatus='Healthy' feeding_schedule='103' />
+	<animals animalid='3' name='Chipmunk' taxkingdom='Animalia'
+		taxphylum='Chordata' taxclass='Aves' taxorder='Galliformes'
+		taxfamily='Phasianidae' taxgenus='Gallus' taxspecies='G. gallus'
+		height='30.00' weight='3.00' type='Bird (Domestic)'
+		healthstatus='Dead' />
 	<feeding_schedules schedule_id='101'
 		feeding_time='8am' recurrence='Weekly on Sundays' food='Steak'
 		notes='Carnivores are super happy to eat steak.' />

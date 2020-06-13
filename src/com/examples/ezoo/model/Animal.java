@@ -19,13 +19,13 @@ public class Animal{
 	private String type = "";
 	private String healthStatus = "";
 	
-	private int feedingSchedule = 0;
+	private Integer feedingSchedule = null;
 	
 	public Animal(){}
 
 	public Animal(long animalID, String name, String taxKingdom, String taxPhylum, String taxClass, String taxOrder,
 			String taxFamily, String taxGenus, String taxSpecies, double height, double weight, String type,
-			String healthStatus, int feedingSchedule) {
+			String healthStatus, Integer feedingSchedule) {
 		super();
 		this.animalID = animalID;
 		this.name = name;
@@ -87,7 +87,7 @@ public class Animal{
 		return taxOrder;
 	}
 	
-	public int getFeedingSchedule() {
+	public Integer getFeedingSchedule() {
 		return feedingSchedule;
 	}
 
@@ -151,7 +151,7 @@ public class Animal{
 		this.healthStatus = healthStatus;
 	}
 	
-	public void setFeedingSchedule(int feedingSchedule) {
+	public void setFeedingSchedule(Integer feedingSchedule) {
 		this.feedingSchedule = feedingSchedule;
 	}
 

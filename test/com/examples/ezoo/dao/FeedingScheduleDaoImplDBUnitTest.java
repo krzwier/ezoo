@@ -197,30 +197,59 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 		Throwable thrown = catchThrowable(() -> {
 			fsdi.deleteFeedingSchedule(fs);
 		});
-		
-		assertThat(thrown)
-			.isInstanceOf(Exception.class)
-			.hasMessageMatching(".*Delete.*fail.*");
+
+		assertThat(thrown).isInstanceOf(Exception.class).hasMessageMatching(".*Delete.*fail.*");
 
 	}
-	
+
 	@Test
 	public void getFeedingSchedule_givenAnimalWithValidFeedingSchedule_ReturnsFeedingSchedule() throws Exception {
 		FeedingSchedule expectedFeedingSchedule = new FeedingSchedule(103, "1pm", "daily", "Backyard Basics",
 				"Helps chickens survive even though they prefer grubs and scratch.");
-		
-		Animal a = new Animal(2L, "Toosty", "Animalia", "Chordata", "Aves", "Galliformes",
-				"Phasianidae", "Gallus", "G. gallus", 30.00d, 3.00d, "Bird (Domestic)",
-				"Healthy", 103);
-		
+
+		Animal a = new Animal(2L, "Toosty", "Animalia", "Chordata", "Aves", "Galliformes", "Phasianidae", "Gallus",
+				"G. gallus", 30.00d, 3.00d, "Bird (Domestic)", "Healthy", 103);
+
+		PowerMockito.mockStatic(DAOUtilities.class);
+		when(DAOUtilities.getConnection()).thenReturn(connection);
+
+		FeedingSchedule actualFeedingSchedule = fsdi.getFeedingSchedule(a);
+
+		assertThat(actualFeedingSchedule).isEqualToComparingFieldByField(expectedFeedingSchedule);
+
+	}
+
+	@Test
+	public void getFeedingSchedule_givenAnimalWithNoFeedingSchedule_ReturnsNull() throws Exception {
+		FeedingSchedule expectedFeedingSchedule = null;
+
+		Animal a = new Animal(3L, "Chipmunk", "Animalia", "Chordata", "Aves", "Galliformes", "Phasianidae", "Gallus",
+				"G. gallus", 30.00d, 3.00d, "Bird (Domestic)", "Dead", null);
+
 		PowerMockito.mockStatic(DAOUtilities.class);
 		when(DAOUtilities.getConnection()).thenReturn(connection);
 		
 		FeedingSchedule actualFeedingSchedule = fsdi.getFeedingSchedule(a);
-		
-		assertThat(actualFeedingSchedule).isEqualToComparingFieldByField(expectedFeedingSchedule);
-		
-		
+
+		assertEquals(expectedFeedingSchedule,actualFeedingSchedule);
 	}
 
+	/*
+	 * @Test public void
+	 * getFeedingSchedule_givenAnimalNotInDatabase_ThrowsException() throws
+	 * Exception { Animal a = new Animal(3L, "Chipmunk", "Animalia", "Chordata",
+	 * "Aves", "Galliformes", "Phasianidae", "Gallus", "G. gallus", 30.00d, 3.00d,
+	 * "Bird (Domestic)", "Dead", 107);
+	 * 
+	 * PowerMockito.mockStatic(DAOUtilities.class);
+	 * when(DAOUtilities.getConnection()).thenReturn(connection);
+	 * 
+	 * Throwable thrown = catchThrowable(() -> { FeedingSchedule
+	 * actualFeedingSchedule = fsdi.getFeedingSchedule(a); });
+	 * 
+	 * assertThat(thrown).isInstanceOf(Exception.class).
+	 * hasMessageContaining("animal does not exist.*database", "i");
+	 * 
+	 * }
+	 */
 }

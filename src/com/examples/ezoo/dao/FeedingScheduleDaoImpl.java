@@ -34,7 +34,8 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 
 			success = stmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new Exception("Insert feeding schedule failed:" + feedingScheduleToSave +
+					". " + e.getMessage());
 		} finally {
 			try {
 				if (stmt != null) {
@@ -168,7 +169,12 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 	@Override
 	public FeedingSchedule getFeedingSchedule(Animal animal) {
 		
-		int feedingScheduleID = animal.getFeedingSchedule();
+		Integer feedingScheduleID = animal.getFeedingSchedule();
+		
+		if (feedingScheduleID == null) {
+			return null;
+		}
+
 		FeedingSchedule fs = new FeedingSchedule();
 		
 		Connection connection = null;

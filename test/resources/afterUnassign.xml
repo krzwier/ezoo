@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<animals animalid='1' name='Leo' taxkingdom='Animalia'
+		taxphylum='Chordata' taxclass='Mammalia' taxorder='Carnivora'
+		taxfamily='Felidae' taxgenus='Panthera' taxspecies='P. leo'
+		height='120.88' weight='400.67' type='Mammal (Terrestrial)'
+		healthstatus='Healthy' feeding_schedule='101' />
+	<animals animalid='2' name='Toosty' taxkingdom='Animalia'
+		taxphylum='Chordata' taxclass='Aves' taxorder='Galliformes'
+		taxfamily='Phasianidae' taxgenus='Gallus' taxspecies='G. gallus'
+		height='30.00' weight='3.00' type='Bird (Domestic)'
+		healthstatus='Healthy' />
+	<animals animalid='3' name='Chipmunk' taxkingdom='Animalia'
+		taxphylum='Chordata' taxclass='Aves' taxorder='Galliformes'
+		taxfamily='Phasianidae' taxgenus='Gallus' taxspecies='G. gallus'
+		height='30.00' weight='3.00' type='Bird (Domestic)'
+		healthstatus='Dead' />
+	<feeding_schedules schedule_id='101'
+		feeding_time='8am' recurrence='Weekly on Sundays' food='Steak'
+		notes='Carnivores are super happy to eat steak.' />
+	<feeding_schedules schedule_id='102'
+		feeding_time='10am' recurrence='daily' food='kibble' />
+	<feeding_schedules schedule_id='103'
+		feeding_time='1pm' recurrence='daily' food='Backyard Basics'
+		notes='Helps chickens survive even though they prefer grubs and scratch.' />
+
+
+</dataset>

@@ -66,17 +66,17 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 			connection = DAOUtilities.getConnection();
 
 			if (feedingScheduleToDelete.getNotes() == null) {
+				// notes field is null
 
 				String sql = "DELETE FROM feeding_schedules WHERE " + "schedule_id = ? AND " + "feeding_time = ? AND "
 						+ "recurrence = ? AND " + "food = ? AND " + "notes IS NULL";
-				// + "notes = ? ";
 
 				stmt = connection.prepareStatement(sql);
 				stmt.setLong(1, feedingScheduleToDelete.getSchedule_ID());
 				stmt.setString(2, feedingScheduleToDelete.getFeeding_time());
 				stmt.setString(3, feedingScheduleToDelete.getRecurrence());
 				stmt.setString(4, feedingScheduleToDelete.getFood());
-				// stmt.setString(5, feedingScheduleToDelete.getNotes());
+				
 			} else {
 				// notes field is not null
 

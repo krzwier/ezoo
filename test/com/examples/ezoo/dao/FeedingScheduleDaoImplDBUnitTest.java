@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.sql.DataSource;
 
 import org.dbunit.Assertion;
 import org.dbunit.DataSourceBasedDBTestCase;
+import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
@@ -228,28 +230,35 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 
 		PowerMockito.mockStatic(DAOUtilities.class);
 		when(DAOUtilities.getConnection()).thenReturn(connection);
-		
+
 		FeedingSchedule actualFeedingSchedule = fsdi.getFeedingSchedule(a);
 
-		assertEquals(expectedFeedingSchedule,actualFeedingSchedule);
+		assertEquals(expectedFeedingSchedule, actualFeedingSchedule);
+	}
+	
+	@Test
+	public void unassignFeedingSchedule_givenAnimalWithFeedingSchedule_ChangesFeedingScheduleToNull() throws Exception {
+		
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("afterUnassign.xml");
+		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(inputStream);
+		ITable expectedTable = expectedDataSet.getTable("animals");
+
+		Animal a = new Animal(2L, "Toosty", "Animalia", "Chordata", "Aves", "Galliformes", "Phasianidae", "Gallus",
+				"G. gallus", 30.00d, 3.00d, "Bird (Domestic)", "Healthy", 103);
+		
+		PowerMockito.mockStatic(DAOUtilities.class);
+		when(DAOUtilities.getConnection()).thenReturn(connection);
+		
+		
+		fsdi.unassignFeedingSchedule(a);
+		
+		IDataSet databaseDataSet = getConnection().createDataSet();
+		ITable actualTable = databaseDataSet.getTable("animals");
+		
+		Assertion.assertEquals(expectedTable, actualTable);
+
+		
 	}
 
-	/*
-	 * @Test public void
-	 * getFeedingSchedule_givenAnimalNotInDatabase_ThrowsException() throws
-	 * Exception { Animal a = new Animal(3L, "Chipmunk", "Animalia", "Chordata",
-	 * "Aves", "Galliformes", "Phasianidae", "Gallus", "G. gallus", 30.00d, 3.00d,
-	 * "Bird (Domestic)", "Dead", 107);
-	 * 
-	 * PowerMockito.mockStatic(DAOUtilities.class);
-	 * when(DAOUtilities.getConnection()).thenReturn(connection);
-	 * 
-	 * Throwable thrown = catchThrowable(() -> { FeedingSchedule
-	 * actualFeedingSchedule = fsdi.getFeedingSchedule(a); });
-	 * 
-	 * assertThat(thrown).isInstanceOf(Exception.class).
-	 * hasMessageContaining("animal does not exist.*database", "i");
-	 * 
-	 * }
-	 */
+
 }

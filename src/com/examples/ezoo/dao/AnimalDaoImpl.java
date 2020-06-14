@@ -46,7 +46,6 @@ public class AnimalDaoImpl implements AnimalDAO {
 
 				a.setType(rs.getString("type"));
 				a.setHealthStatus(rs.getString("healthstatus"));
-				a.setFeedingSchedule(rs.getInt("feeding_schedule"));
 				
 				animals.add(a);
 			}
@@ -99,7 +98,6 @@ public class AnimalDaoImpl implements AnimalDAO {
 
 			stmt.setString(12, animal.getType());
 			stmt.setString(13, animal.getHealthStatus());
-			stmt.setLong(14, animal.getFeedingSchedule());
 			
 			success = stmt.executeUpdate();
 		} catch (SQLException e) {

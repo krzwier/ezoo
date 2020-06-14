@@ -210,7 +210,7 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 				"Helps chickens survive even though they prefer grubs and scratch.");
 
 		Animal a = new Animal(2L, "Toosty", "Animalia", "Chordata", "Aves", "Galliformes", "Phasianidae", "Gallus",
-				"G. gallus", 30.00d, 3.00d, "Bird (Domestic)", "Healthy", 103);
+				"G. gallus", 30.00d, 3.00d, "Bird (Domestic)", "Healthy");
 
 		PowerMockito.mockStatic(DAOUtilities.class);
 		when(DAOUtilities.getConnection()).thenReturn(connection);
@@ -226,7 +226,7 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 		FeedingSchedule expectedFeedingSchedule = null;
 
 		Animal a = new Animal(3L, "Chipmunk", "Animalia", "Chordata", "Aves", "Galliformes", "Phasianidae", "Gallus",
-				"G. gallus", 30.00d, 3.00d, "Bird (Domestic)", "Dead", null);
+				"G. gallus", 30.00d, 3.00d, "Bird (Domestic)", "Dead");
 
 		PowerMockito.mockStatic(DAOUtilities.class);
 		when(DAOUtilities.getConnection()).thenReturn(connection);
@@ -236,6 +236,7 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 		assertEquals(expectedFeedingSchedule, actualFeedingSchedule);
 	}
 	
+	
 	@Test
 	public void unassignFeedingSchedule_givenAnimalWithFeedingSchedule_ChangesFeedingScheduleToNull() throws Exception {
 		
@@ -244,7 +245,7 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 		ITable expectedTable = expectedDataSet.getTable("animals");
 
 		Animal a = new Animal(2L, "Toosty", "Animalia", "Chordata", "Aves", "Galliformes", "Phasianidae", "Gallus",
-				"G. gallus", 30.00d, 3.00d, "Bird (Domestic)", "Healthy", 103);
+				"G. gallus", 30.00d, 3.00d, "Bird (Domestic)", "Healthy");
 		
 		PowerMockito.mockStatic(DAOUtilities.class);
 		when(DAOUtilities.getConnection()).thenReturn(connection);

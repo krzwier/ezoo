@@ -260,6 +260,31 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 
 		
 	}
+	
+	@Test
+	public void unassignFeedingSchedule_givenAnimalWithNoFeedingSchedule_NoChange() throws Exception {
+		
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data.xml");
+		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(inputStream);
+		ITable expectedTable = expectedDataSet.getTable("animals");
+
+		Animal a = new Animal(3L, "Chipmunk", "Animalia", "Chordata", "Aves", "Galliformes", "Phasianidae", "Gallus",
+				"G. gallus", 30.00d, 3.00d, "Bird (Domestic)", "Dead");
+		
+		PowerMockito.mockStatic(DAOUtilities.class);
+		when(DAOUtilities.getConnection()).thenReturn(connection);
+		
+		
+		fsdi.unassignFeedingSchedule(a);
+		
+		IDataSet databaseDataSet = getConnection().createDataSet();
+		ITable actualTable = databaseDataSet.getTable("animals");
+		
+		Assertion.assertEquals(expectedTable, actualTable);
+
+		
+	}
+
 
 
 }

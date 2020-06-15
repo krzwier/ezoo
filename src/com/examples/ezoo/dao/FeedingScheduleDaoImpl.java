@@ -246,7 +246,42 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 
 	@Override
 	public void assignFeedingSchedule(Animal animal, FeedingSchedule feedingSchedule) throws Exception {
-		// TODO Auto-generated method stub
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		int success = 0;
+		
+		try {
+			connection = DAOUtilities.getConnection();
+			
+			String sql = "UPDATE animals SET feeding_schedule = ? WHERE animalid = ?";
+			
+			stmt = connection.prepareStatement(sql);
+			
+			stmt.setLong(1, feedingSchedule.getSchedule_ID());
+			stmt.setLong(2,animal.getAnimalID());
+
+			success = stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			if (success == 0) {
+				// then update didn't occur, throw an exception
+				throw new Exception("Assign feeding schedule failed:" + animal + ", " + feedingSchedule);
+			}
+		}
 
 	}
 

@@ -220,6 +220,24 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 		assertThat(actualFeedingSchedule).isEqualToComparingFieldByField(expectedFeedingSchedule);
 
 	}
+	
+	@Test
+	public void getFeedingSchedule_givenAnimalNotInDatabase_ThrowsException() throws Exception {
+
+		Animal a = new Animal(5L, "Toosty", "Animalia", "Chordata", "Aves", "Galliformes", "Phasianidae", "Gallus",
+				"G. gallus", 30.00d, 3.00d, "Bird (Domestic)", "Healthy");
+
+		PowerMockito.mockStatic(DAOUtilities.class);
+		when(DAOUtilities.getConnection()).thenReturn(connection);
+
+		Throwable thrown = catchThrowable(() -> {
+			FeedingSchedule actualFeedingSchedule = fsdi.getFeedingSchedule(a);
+		});
+		
+		assertThat(thrown).isInstanceOf(Exception.class).hasMessageMatching(".*not.*feeding.*schedule.*");
+		
+
+	}
 
 	@Test
 	public void getFeedingSchedule_givenAnimalWithNoFeedingSchedule_ReturnsNull() throws Exception {

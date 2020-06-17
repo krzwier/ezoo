@@ -167,9 +167,10 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 	}
 
 	@Override
-	public FeedingSchedule getFeedingSchedule(Animal animal) {
+	public FeedingSchedule getFeedingSchedule(Animal animal) throws Exception {
 
 		FeedingSchedule fs = new FeedingSchedule();
+		boolean success = false;
 		
 		Connection connection = null;
 		PreparedStatement stmtGetFeedingScheduleID = null;
@@ -215,10 +216,7 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 					}
 					
 				} 
-
-			} else {
-				// animal does not exist in database
-				fs = null;
+				success = true;
 			}
 			
 		} catch (SQLException e) {
@@ -237,6 +235,10 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+			}
+			if (success == false) {
+				// then update didn't occur, throw an exception
+				throw new Exception("Could not retrieve feeding schedule:" + animal );
 			}
 		}
 		

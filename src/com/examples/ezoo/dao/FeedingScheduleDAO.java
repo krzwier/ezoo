@@ -34,8 +34,9 @@ public interface FeedingScheduleDAO {
 	/**
 	 * Used to retrieve a single feeding schedule from the datastore
 	 * for a given animal
+	 * @throws Exception 
 	 */
-	FeedingSchedule getFeedingSchedule(Animal animal);
+	FeedingSchedule getFeedingSchedule(Animal animal) throws Exception;
 	
 	/**
 	 * Used to assign a feeding schedule to a particular animal

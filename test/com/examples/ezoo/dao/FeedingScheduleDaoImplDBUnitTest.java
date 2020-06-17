@@ -311,7 +311,34 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 		
 		
 	}
+	/*
+	@Test
+	public void assignFeedingSchedule_givenAnimalWithNoFeedingScheduleAndScheduleNotAlreadyInDatabase_SaveFeedingScheduleAndAssignToAnimal() throws Exception {
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("afterAssign2.xml");
+		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(inputStream);
+		ITable expectedAnimalsTable = expectedDataSet.getTable("animals");
+		ITable expectedFeedingSchedulesTable = expectedDataSet.getTable("feeding_schedules");
+		
+		Animal a = new Animal(3L, "Chipmunk", "Animalia", "Chordata", "Aves", "Galliformes", "Phasianidae", "Gallus",
+				"G. gallus", 30.00d, 3.00d, "Bird (Domestic)", "Dead");
+		FeedingSchedule fs = new FeedingSchedule(104, "midnight", "never", "Nothing",
+				"Dead animals do not need to eat.");
+		
+		PowerMockito.mockStatic(DAOUtilities.class);
+		when(DAOUtilities.getConnection()).thenReturn(connection);
+		
+		fsdi.assignFeedingSchedule(a,fs);
+		
+		IDataSet databaseDataSet = getConnection().createDataSet();
+		ITable actualAnimalsTable = databaseDataSet.getTable("animals");
+		ITable actualFeedingSchedulesTable = databaseDataSet.getTable("feeding_schedules");
+		
+		Assertion.assertEquals(expectedAnimalsTable, actualAnimalsTable);
+		Assertion.assertEquals(expectedFeedingSchedulesTable, actualFeedingSchedulesTable);
+		
+		
+	}
 
-
+*/
 
 }

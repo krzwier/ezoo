@@ -248,10 +248,30 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 	public void assignFeedingSchedule(Animal animal, FeedingSchedule feedingSchedule) throws Exception {
 		Connection connection = null;
 		PreparedStatement stmt = null;
+		PreparedStatement stmtGetFeedingScheduleRecord = null;
+		
 		int success = 0;
 		
 		try {
 			connection = DAOUtilities.getConnection();
+			
+			/*
+			 * // first check if feeding schedule exists in database
+			 * 
+			 * String sqlGetFeedingScheduleRecord =
+			 * "SELECT * FROM feeding_schedules WHERE schedule_id = ?";
+			 * 
+			 * stmtGetFeedingScheduleRecord =
+			 * connection.prepareStatement(sqlGetFeedingScheduleRecord);
+			 * 
+			 * stmtGetFeedingScheduleRecord.setLong(1,feedingSchedule.getSchedule_ID());
+			 * 
+			 * ResultSet rs = stmtGetFeedingScheduleRecord.executeQuery();
+			 * 
+			 * 
+			 * if (!rs.next()) { saveFeedingSchedule(feedingSchedule); }
+			 */
+			
 			
 			String sql = "UPDATE animals SET feeding_schedule = ? WHERE animalid = ?";
 			
@@ -270,6 +290,9 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 			try {
 				if (stmt != null) {
 					stmt.close();
+				}
+				if (stmtGetFeedingScheduleRecord != null) {
+					stmtGetFeedingScheduleRecord.close();
 				}
 				if (connection != null) {
 					connection.close();

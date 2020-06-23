@@ -5,7 +5,7 @@
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>eZoo</groupId>
+	<groupId>com.github.krzwier</groupId>
 	<artifactId>eZoo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
@@ -16,11 +16,13 @@
 	</properties>
 
 	<dependencies>
+		<!-- 
 		<dependency>
 			<groupId>org.jboss.spec.javax.servlet</groupId>
 			<artifactId>jboss-servlet-api_4.0_spec</artifactId>
 			<version>2.0.0.Final</version>
 		</dependency>
+		 -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -67,7 +69,12 @@
 		<!-- <dependency> <groupId>org.junit.platform</groupId> <artifactId>junit-platform-runner</artifactId> 
 			<version>1.2.0</version> <scope>test</scope> </dependency> -->
 
-
+		<dependency>
+			<groupId>jakarta.platform</groupId>
+			<artifactId>jakarta.jakartaee-api</artifactId>
+			<version>8.0.0</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

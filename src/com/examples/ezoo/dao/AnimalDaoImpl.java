@@ -76,7 +76,7 @@ public class AnimalDaoImpl implements AnimalDAO {
 
 		try {
 			connection = DAOUtilities.getConnection();
-			String sql = "INSERT INTO ANIMALS VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO ANIMALS VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 			// Setup PreparedStatement
 			stmt = connection.prepareStatement(sql);

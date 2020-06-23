@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,6 @@ import javax.sql.DataSource;
 
 import org.dbunit.Assertion;
 import org.dbunit.DataSourceBasedDBTestCase;
-import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
@@ -231,7 +229,7 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 		when(DAOUtilities.getConnection()).thenReturn(connection);
 
 		Throwable thrown = catchThrowable(() -> {
-			FeedingSchedule actualFeedingSchedule = fsdi.getFeedingSchedule(a);
+			fsdi.getFeedingSchedule(a);
 		});
 		
 		assertThat(thrown).isInstanceOf(Exception.class).hasMessageMatching(".*not.*feeding.*schedule.*");

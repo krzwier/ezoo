@@ -57,7 +57,7 @@
                           <li class="divider"></li>
                           <li><a href="addAnimal">Add Animal</a></li>
                           <li><a href="#">Feeding Schedules</a></li>
-                          <li><a href="#">Add Feeding Schedule</a></li>
+                          <li><a href="createFeedingSchedule">Add Feeding Schedule</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

@@ -25,6 +25,7 @@
 		<table class="table table-striped table-hover table-responsive ezoo-datatable">
 			<thead>
 				<tr>
+					<th class="text-center">Schedule ID</th>
 					<th class="text-center">Feeding Time</th>
 					<th class="text-center">Recurrence</th>
 					<th class="text-center">Food</th>
@@ -34,6 +35,7 @@
 			<tbody>
 				<c:forEach var="feedingSchedule" items="${feedingSchedules}">
 					<tr>
+						<td><c:out value="${feedingSchedule.schedule_ID}" /></td>
 						<td><c:out value="${feedingSchedule.feeding_time}" /></td>
 						<td><c:out value="${feedingSchedule.recurrence}" /></td>
 						<td><c:out value="${feedingSchedule.food}" /></td>
@@ -46,27 +48,6 @@
 	  </div>
 	</header>
 	
-	<section>
-	  <div class="container">
-	    
-	    <h1><small>Cool Facts</small></h1>
-		<h4>Largest Animal (lbs):
-		  <small>
-		    <c:if test="${not empty largestAnimal}">
-		      ${largestAnimal.name}, at ${largestAnimal.weight } lbs
-		    </c:if>
-		  </small>
-		</h4>
-		<h4>Longest Named Animal:
-		  <small>
-		    <c:if test="${not empty longestNamedAnimal}">
-		      ${longestNamedAnimal.name }
-		    </c:if>
-		  </small>
-		</h4>
-	    
-	  </div>
-	</section>
 
 	<!-- Footer -->
 	<jsp:include page="footer.jsp" />

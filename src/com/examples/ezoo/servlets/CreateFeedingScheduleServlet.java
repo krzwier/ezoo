@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.examples.ezoo.dao.AnimalDAO;
 import com.examples.ezoo.dao.DAOUtilities;
 import com.examples.ezoo.dao.FeedingScheduleDAO;
-import com.examples.ezoo.model.Animal;
 import com.examples.ezoo.model.FeedingSchedule;
 
 /**
@@ -60,7 +58,7 @@ public class CreateFeedingScheduleServlet extends HttpServlet {
 			dao.saveFeedingSchedule(feedingScheduleToSave);
 			request.getSession().setAttribute("message", "Feeding schedule successfully created");
 			request.getSession().setAttribute("messageClass", "alert-success");
-			response.sendRedirect("animalCare");
+			response.sendRedirect("feedingScheduleHome.jsp");
 
 
 		}catch(SQLIntegrityConstraintViolationException e){

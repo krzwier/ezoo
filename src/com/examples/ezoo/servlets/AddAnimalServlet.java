@@ -18,10 +18,12 @@ import com.examples.ezoo.model.Animal;
  */
 @WebServlet("/addAnimal")
 public class AddAnimalServlet extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
        
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5581926865528809209L;
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("addAnimal.jsp").forward(request, response);

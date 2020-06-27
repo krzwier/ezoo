@@ -22,7 +22,7 @@ public class FeedingScheduleServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// Grab a list of Animals from the Database
+		// Grab a list of Feeding Schedules from the Database
 		FeedingScheduleDAO dao = DAOUtilities.getFeedingScheduleDao();
 		List<FeedingSchedule> feedingSchedules = dao.getAllFeedingSchedules();
 

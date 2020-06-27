@@ -18,15 +18,12 @@ import com.examples.ezoo.model.FeedingSchedule;
  */
 @WebServlet("/createFeedingSchedule")
 public class CreateFeedingScheduleServlet extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
        
-	
-	/*
-	 * @Override protected void doGet(HttpServletRequest request,
-	 * HttpServletResponse response) throws ServletException, IOException {
-	 * request.getRequestDispatcher("addAnimal.jsp").forward(request, response); }
+	/**
+	 * 
 	 */
+	private static final long serialVersionUID = 6422516734646752188L;
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("createFeedingSchedule.jsp").forward(request, response);
@@ -58,7 +55,7 @@ public class CreateFeedingScheduleServlet extends HttpServlet {
 			dao.saveFeedingSchedule(feedingScheduleToSave);
 			request.getSession().setAttribute("message", "Feeding schedule successfully created");
 			request.getSession().setAttribute("messageClass", "alert-success");
-			response.sendRedirect("feedingScheduleHome.jsp");
+			response.sendRedirect("feedingSchedules");
 
 
 		}catch(SQLIntegrityConstraintViolationException e){

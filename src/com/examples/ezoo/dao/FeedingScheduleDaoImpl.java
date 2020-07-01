@@ -351,4 +351,53 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 
 	}
 
+	@Override
+	public FeedingSchedule getFeedingSchedule(Long schedule_id) {
+		FeedingSchedule fs = new FeedingSchedule();
+
+		Connection connection = null;
+		PreparedStatement stmt = null;
+
+		try {
+			connection = DAOUtilities.getConnection();
+
+			String sql = "SELECT * FROM feeding_schedules WHERE schedule_id = ?";
+
+			stmt = connection.prepareStatement(sql);
+			stmt.setLong(1, schedule_id);
+
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			if (rs.next()) {
+				
+				// feeding schedule exists in database
+				
+				fs.setSchedule_ID(rs.getInt("schedule_id"));
+				fs.setFeeding_time(rs.getString("feeding_time"));
+				fs.setRecurrence(rs.getString("recurrence"));
+				fs.setFood(rs.getString("food"));
+				fs.setNotes(rs.getString("notes"));
+			} else {
+				//feeding schedule does not exist in database
+				fs = null;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		// TODO Auto-generated method stub
+		return fs;
+	}
+
 }

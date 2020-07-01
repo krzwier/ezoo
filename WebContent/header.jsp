@@ -58,6 +58,7 @@
                           <li><a href="addAnimal">Add Animal</a></li>
                           <li><a href="feedingSchedules">Feeding Schedules</a></li>
                           <li><a href="createFeedingSchedule">Add Feeding Schedule</a></li>
+                          <li><a href="assignFeedingSchedule">Assign Feeding Schedule</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

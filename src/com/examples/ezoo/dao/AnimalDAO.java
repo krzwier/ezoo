@@ -23,5 +23,10 @@ public interface AnimalDAO {
 	 */
 	void saveAnimal(Animal animalToSave) throws Exception;
 
-	
+	/**
+	 * Used to retrieve specific animal record by animal ID
+	 * @param animalID
+	 * @return
+	 */
+	Animal getAnimal(Long animalID);
 }

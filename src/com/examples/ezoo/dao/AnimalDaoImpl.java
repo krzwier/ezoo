@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.examples.ezoo.model.Animal;
+import com.examples.ezoo.model.FeedingSchedule;
 
 public class AnimalDaoImpl implements AnimalDAO {
 
@@ -40,13 +41,13 @@ public class AnimalDaoImpl implements AnimalDAO {
 				a.setTaxFamily(rs.getString("taxfamily"));
 				a.setTaxGenus(rs.getString("taxgenus"));
 				a.setTaxSpecies(rs.getString("taxspecies"));
-				
+
 				a.setHeight(rs.getDouble("height"));
 				a.setWeight(rs.getDouble("weight"));
 
 				a.setType(rs.getString("type"));
 				a.setHealthStatus(rs.getString("healthstatus"));
-				
+
 				animals.add(a);
 			}
 
@@ -98,7 +99,7 @@ public class AnimalDaoImpl implements AnimalDAO {
 
 			stmt.setString(12, animal.getType());
 			stmt.setString(13, animal.getHealthStatus());
-			
+
 			success = stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -118,6 +119,63 @@ public class AnimalDaoImpl implements AnimalDAO {
 			throw new Exception("Insert animal failed: " + animal);
 		}
 
+	}
+
+	@Override
+	public Animal getAnimal(Long animalID) {
+		Animal a = new Animal();
+		Connection connection = null;
+		PreparedStatement stmt = null;
+
+		try {
+			connection = DAOUtilities.getConnection();
+
+			String sql = "SELECT * FROM ANIMALS WHERE animalid = ?";
+
+			stmt = connection.prepareStatement(sql);
+			stmt.setLong(1, animalID);
+
+			ResultSet rs = stmt.executeQuery(sql);
+
+			if (rs.next()) {
+			
+				a.setAnimalID(rs.getLong("animalid"));
+				a.setName(rs.getString("name"));
+
+				a.setTaxKingdom(rs.getString("taxkingdom"));
+				a.setTaxPhylum(rs.getString("taxphylum"));
+				a.setTaxClass(rs.getString("taxclass"));
+				a.setTaxOrder(rs.getString("taxorder"));
+				a.setTaxFamily(rs.getString("taxfamily"));
+				a.setTaxGenus(rs.getString("taxgenus"));
+				a.setTaxSpecies(rs.getString("taxspecies"));
+
+				a.setHeight(rs.getDouble("height"));
+				a.setWeight(rs.getDouble("weight"));
+
+				a.setType(rs.getString("type"));
+				a.setHealthStatus(rs.getString("healthstatus"));
+
+			} else {
+				a = null;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		// TODO Auto-generated method stub
+		return a;
 	}
 
 }

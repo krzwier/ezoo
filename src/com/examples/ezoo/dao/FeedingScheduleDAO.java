@@ -34,7 +34,7 @@ public interface FeedingScheduleDAO {
 	/*
 	 * Used to retrieve a specific feeding schedule record by schedule id
 	 */
-	FeedingSchedule getFeedingSchedule(Long schedule_id);
+	FeedingSchedule getFeedingSchedule(long schedule_id);
 	
 	/**
 	 * Used to retrieve a single feeding schedule from the datastore

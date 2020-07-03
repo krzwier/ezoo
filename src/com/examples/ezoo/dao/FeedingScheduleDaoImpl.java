@@ -352,7 +352,7 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 	}
 
 	@Override
-	public FeedingSchedule getFeedingSchedule(Long schedule_id) {
+	public FeedingSchedule getFeedingSchedule(long schedule_id) {
 		FeedingSchedule fs = new FeedingSchedule();
 
 		Connection connection = null;

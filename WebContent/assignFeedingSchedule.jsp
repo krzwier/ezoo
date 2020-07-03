@@ -27,8 +27,8 @@
 
 		<form name="assignFeedingScheduleForm" action="assignFeedingSchedule"
 			method='post'>
-			<div class="form-group">
-				<h2>Select feeding schedule:</h2>
+			<fieldset>
+				<legend>Select feeding schedule:</legend>
 				<table
 					class="table table-striped table-hover table-responsive ezoo-datatable">
 					<thead>
@@ -65,9 +65,10 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			</div>
-			<div class="form-group">
-				<h2>Select feeding schedule:</h2>
+			</fieldset>
+			<fieldset>
+				<legend>Select feeding schedule:</legend>
+
 
 				<table
 					class="table table-striped table-hover table-responsive ezoo-datatable">
@@ -97,16 +98,14 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			</div>
+			</fieldset>
 			<div class="form-group">
-				<c:set var="animalRowNo" value="${animalRadioButton - 1}" />
-				<input type="hidden" name="chosen_animnalID"
-					value="${animals[animalRowNo].animalID}" />
-				<%-- 		<c:set var="chosen_animalID" value="${animals[animalRowNo].animalID}" /> --%>
-				<c:set var="feedingScheduleRowNo"
-					value="${feedingScheduleRadioButton - 1}" />
+				<c:set var="animalRowNo" value="${6}" />
+				<input type="hidden" name="chosen_animalID"
+					value="${sessionScope.animals[animalRowNo].animalID}" />
+				<c:set var="feedingScheduleRowNo" value="${1}" />
 				<input type="hidden" name="chosen_scheduleID"
-					value="${feedingSchedules[feedingScheduleRowNo].schedule_ID}" />
+					value="${sessionScope.feedingSchedules[feedingScheduleRowNo].schedule_ID}" />
 
 				<button type="submit" class="btn btn-primary">Assign</button>
 

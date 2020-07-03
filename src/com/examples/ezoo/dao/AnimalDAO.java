@@ -28,5 +28,5 @@ public interface AnimalDAO {
 	 * @param animalID
 	 * @return
 	 */
-	Animal getAnimal(Long animalID);
+	Animal getAnimal(long animalID);
 }

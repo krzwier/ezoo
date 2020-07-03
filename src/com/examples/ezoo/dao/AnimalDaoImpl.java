@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.examples.ezoo.model.Animal;
-import com.examples.ezoo.model.FeedingSchedule;
 
 public class AnimalDaoImpl implements AnimalDAO {
 
@@ -122,7 +121,7 @@ public class AnimalDaoImpl implements AnimalDAO {
 	}
 
 	@Override
-	public Animal getAnimal(Long animalID) {
+	public Animal getAnimal(long animalID) {
 		Animal a = new Animal();
 		Connection connection = null;
 		PreparedStatement stmt = null;

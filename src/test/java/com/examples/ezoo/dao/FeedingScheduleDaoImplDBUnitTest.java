@@ -1,8 +1,8 @@
 package com.examples.ezoo.dao;
 
-import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.Mockito.when;
 
 import java.io.InputStream;
 import java.sql.Connection;
@@ -28,6 +28,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.examples.ezoo.model.Animal;
 import com.examples.ezoo.model.FeedingSchedule;
+
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(DAOUtilities.class)
@@ -61,6 +62,7 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 	protected DatabaseOperation getTearDownOperation() {
 		return DatabaseOperation.DELETE_ALL;
 	}
+	
 
 	@Before
 	public void setUp() throws Exception {
@@ -327,6 +329,20 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 		
 		
 	}
+	
+	@Test
+	public void getFeedingSchedule_givenValidID_ReturnRecord() throws Exception {
+		FeedingSchedule expectedFeedingSchedule = new FeedingSchedule(103, "1pm", "daily", "Backyard Basics",
+				"Helps chickens survive even though they prefer grubs and scratch.");
+
+		PowerMockito.mockStatic(DAOUtilities.class);
+		when(DAOUtilities.getConnection()).thenReturn(connection);
+
+		FeedingSchedule actualFeedingSchedule = fsdi.getFeedingSchedule(103);
+
+		assertEquals(expectedFeedingSchedule, actualFeedingSchedule);
+	}
+	
 	/*
 	@Test
 	public void assignFeedingSchedule_givenAnimalWithNoFeedingScheduleAndScheduleNotAlreadyInDatabase_SaveFeedingScheduleAndAssignToAnimal() throws Exception {

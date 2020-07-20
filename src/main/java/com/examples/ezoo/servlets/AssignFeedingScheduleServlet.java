@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.examples.ezoo.dao.AnimalDAO;
 import com.examples.ezoo.dao.DAOUtilities;
@@ -45,31 +46,24 @@ public class AssignFeedingScheduleServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		long animalID = Long.parseLong(request.getParameter("chosen_animalID"));
+		
+		HttpSession session = request.getSession();
+		
+		List<Animal> animals = (List<Animal>) session.getAttribute("animals");
+		List<FeedingSchedule> feedingSchedules = (List<FeedingSchedule>) session.getAttribute("feedingSchedules");
+		
+		int animalRowNum = Integer.parseInt(request.getParameter("animalRadioButton"));
+		animalRowNum--;
+
+//		long animalID = Long.parseLong(request.getParameter("chosen_animalID"));
 
 
-		/*String name = request.getParameter("animals[animalRowNo].name");
-
-		String kingdom = request.getParameter("animals[animalRowNo].kingdom");
-		String phylum = request.getParameter("animals[animalRowNo].phylum");
-		String clazz = request.getParameter("animals[animalRowNo].clazz");
-		String order = request.getParameter("animals[animalRowNo].rder");
-		String family = request.getParameter("animals[animalRowNo].family");
-		String genus = request.getParameter("animals[animalRowNo].genus");
-		String species = request.getParameter("animals[animalRowNo].species");
-		String type = request.getParameter("animals[animalRowNo].type");
-		String healthStatus = request.getParameter("animals[animalRowNo].healthStatus");
-
-		// Since request parameters are ALWAYS Strings we will convert them to Double
-		double height = Double.parseDouble(request.getParameter("animals[animalRowNo].height"));
-		double weight = Double.parseDouble(request.getParameter("animals[animalRowNo].weight"));
-
-		// Create an Animal object from the parameters
-		Animal animalToAssign = new Animal(animalID, name, kingdom, phylum, clazz, order, family, genus, species,
-				height, weight, type, healthStatus);*/
-
-		long feedingScheduleID = Long
-				.parseLong(request.getParameter("chosen_scheduleID"));
+		int feedingScheduleRowNum = Integer.parseInt(request.getParameter("feedingScheduleRadioButton"));
+		feedingScheduleRowNum--;
+		// long feedingScheduleID = Long.parseLong(request.getParameter("chosen_scheduleID"));
+		
+		long animalID = animals.get(animalRowNum).getAnimalID();
+		long feedingScheduleID = feedingSchedules.get(feedingScheduleRowNum).getSchedule_ID();
 		
 		AnimalDAO animalDAO = DAOUtilities.getAnimalDao();
 		FeedingScheduleDAO fsDAO = DAOUtilities.getFeedingScheduleDao();

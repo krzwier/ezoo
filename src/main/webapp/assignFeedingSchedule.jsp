@@ -99,17 +99,18 @@
 					</tbody>
 				</table>
 			</fieldset>
-			<div class="form-group">
+			<button type="submit" class="btn btn-primary">Assign</button>
+			<%-- <div class="form-group">
 				<c:set var="animalRowNo" value="${6}" />
 				<input type="hidden" name="chosen_animalID"
 					value="${sessionScope.animals[animalRowNo].animalID}" />
-				<c:set var="feedingScheduleRowNo" value="${1}" />
+				<c:set var="feedingScheduleRowNo" value="${feedingScheduleRadioButton}" />
 				<input type="hidden" name="chosen_scheduleID"
 					value="${sessionScope.feedingSchedules[feedingScheduleRowNo].schedule_ID}" />
 
 				<button type="submit" class="btn btn-primary">Assign</button>
 
-			</div>
+			</div> --%>
 		</form>
 	</div>
 </header>

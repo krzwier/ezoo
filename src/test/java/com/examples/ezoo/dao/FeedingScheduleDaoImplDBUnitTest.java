@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.when;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -12,7 +13,9 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.dbunit.Assertion;
+import org.dbunit.DBTestCase;
 import org.dbunit.DataSourceBasedDBTestCase;
+import org.dbunit.PropertiesBasedJdbcDatabaseTester;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
@@ -38,21 +41,7 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 
 	private FeedingScheduleDaoImpl fsdi = new FeedingScheduleDaoImpl();
 
-	@Override
-	protected DataSource getDataSource() {
-		JdbcDataSource dataSource = new JdbcDataSource();
-		dataSource.setUrl("jdbc:h2:mem:default;DB_CLOSE_DELAY=-1;init=runscript from 'classpath:schema.sql'");
-		dataSource.setUser("sa");
-		dataSource.setPassword("sa");
-		return dataSource;
-	}
-
-	@Override
-	protected IDataSet getDataSet() throws Exception {
-		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data.xml");
-		return new FlatXmlDataSetBuilder().build(inputStream);
-	}
-
+	
 	@Override
 	protected DatabaseOperation getSetUpOperation() {
 		return DatabaseOperation.REFRESH;
@@ -63,6 +52,35 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 		return DatabaseOperation.DELETE_ALL;
 	}
 	
+	/*
+	public void FeedingSheduleDaoImplDBUnitTest(String name) {
+		//super(name);
+		System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS, "org.h2.Driver");
+		System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, "jdbc:h2:mem:default");
+		System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, "sa");
+		System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, "sa");
+		System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_SCHEMA, "schema.sql");
+		
+	}
+	*/
+	
+	
+	@Override
+	protected DataSource getDataSource() {
+		JdbcDataSource dataSource = new JdbcDataSource();
+		dataSource.setUrl("jdbc:h2:mem:default;DB_CLOSE_DELAY=-1;init=runscript from 'classpath:schema.sql'");
+		dataSource.setUser("sa");
+		dataSource.setPassword("sa");
+		return dataSource;
+	}
+
+	protected IDataSet getDataSet() throws Exception {
+		
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data.xml");
+		return new FlatXmlDataSetBuilder().build(inputStream);
+	}
+
+	
 
 	@Before
 	public void setUp() throws Exception {
@@ -70,10 +88,12 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 		connection = getConnection().getConnection();
 	}
 
+	
 	@After
 	public void tearDown() throws Exception {
 		super.tearDown();
 	}
+
 
 	@Test
 	public void givenDataSetEmptySchema_whenDataSetCreated_thenTablesAreEqual() throws Exception {
@@ -342,7 +362,8 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 
 		assertEquals(expectedFeedingSchedule, actualFeedingSchedule);
 	}
-	
+
+
 	/*
 	@Test
 	public void assignFeedingSchedule_givenAnimalWithNoFeedingScheduleAndScheduleNotAlreadyInDatabase_SaveFeedingScheduleAndAssignToAnimal() throws Exception {

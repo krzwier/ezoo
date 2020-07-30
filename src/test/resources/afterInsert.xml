@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE xml>
 <dataset>
 	<animals animalid='1' name='Leo' taxkingdom='Animalia'
 		taxphylum='Chordata' taxclass='Mammalia' taxorder='Carnivora'

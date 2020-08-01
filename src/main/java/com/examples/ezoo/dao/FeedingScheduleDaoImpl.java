@@ -366,7 +366,10 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 			stmt = connection.prepareStatement(sql);
 			stmt.setLong(1, schedule_id);
 
-			ResultSet rs = stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery();
+			
+			// note that on a PerparedStatement, you never pass the SQL string to the executeQuery method
+			// the call should be simply executeQuery() as above
 			
 			if (rs.next()) {
 				

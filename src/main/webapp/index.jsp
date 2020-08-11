@@ -37,21 +37,21 @@
         <div class="carousel-inner">
             <div class="item active">
                 <!-- Set the first background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('${request.contextPath}resources/imgs/ezoo1.jpg');"></div>
+                <div class="fill" style="background-image:url('${request.contextPath}resources/images/ezoo1.jpg');"></div>
                 <div class="carousel-caption">
                     <h2>Explore.</h2>
                 </div>
             </div>
             <div class="item">
                 <!-- Set the second background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('${request.contextPath}resources/imgs/ezoo2.jpg');"></div>
+                <div class="fill" style="background-image:url('${request.contextPath}resources/images/ezoo2.jpg');"></div>
                 <div class="carousel-caption">
                     <h2>Imagine.</h2>
                 </div>
             </div>
             <div class="item">
                 <!-- Set the third background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('${request.contextPath}resources/imgs/ezoo3.jpg');"></div>
+                <div class="fill" style="background-image:url('${request.contextPath}resources/images/ezoo3.jpg');"></div>
                 <div class="carousel-caption">
                     <h2>Belong again.</h2>
                 </div>

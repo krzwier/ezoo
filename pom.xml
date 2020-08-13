@@ -91,12 +91,6 @@
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.2.3</version>
-				<configuration>
-					<resource>
-						<directory>src/main/webapp</directory>
-						<filtering>false</filtering>
-					</resource>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

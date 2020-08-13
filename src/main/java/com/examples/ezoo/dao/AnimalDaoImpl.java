@@ -134,7 +134,7 @@ public class AnimalDaoImpl implements AnimalDAO {
 			stmt = connection.prepareStatement(sql);
 			stmt.setLong(1, animalID);
 
-			ResultSet rs = stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery();
 
 			if (rs.next()) {
 			

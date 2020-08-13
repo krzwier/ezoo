@@ -29,4 +29,6 @@ public interface AnimalDAO {
 	 * @return
 	 */
 	Animal getAnimal(long animalID);
+	
+	public List<Animal> getAnimalsWithSchedule(long scheduleID);
 }

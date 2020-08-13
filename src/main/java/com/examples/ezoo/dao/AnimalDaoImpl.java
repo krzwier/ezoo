@@ -176,5 +176,62 @@ public class AnimalDaoImpl implements AnimalDAO {
 		// TODO Auto-generated method stub
 		return a;
 	}
+	
+	@Override
+	public List<Animal> getAnimalsWithSchedule(long scheduleID) {
+		Animal a = new Animal();
+		List<Animal> animalList = new ArrayList<>();
+		Connection connection = null;
+		PreparedStatement stmt = null;
+
+		try {
+			connection = DAOUtilities.getConnection();
+
+			String sql = "SELECT * FROM ANIMALS WHERE feeding_schedule = ?";
+
+			stmt = connection.prepareStatement(sql);
+			stmt.setLong(1, scheduleID);
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+			
+				a.setAnimalID(rs.getLong("animalid"));
+				a.setName(rs.getString("name"));
+
+				a.setTaxKingdom(rs.getString("taxkingdom"));
+				a.setTaxPhylum(rs.getString("taxphylum"));
+				a.setTaxClass(rs.getString("taxclass"));
+				a.setTaxOrder(rs.getString("taxorder"));
+				a.setTaxFamily(rs.getString("taxfamily"));
+				a.setTaxGenus(rs.getString("taxgenus"));
+				a.setTaxSpecies(rs.getString("taxspecies"));
+
+				a.setHeight(rs.getDouble("height"));
+				a.setWeight(rs.getDouble("weight"));
+
+				a.setType(rs.getString("type"));
+				a.setHealthStatus(rs.getString("healthstatus"));
+				
+				animalList.add(a);
+
+			} 
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return animalList;
+		
+	}
 
 }

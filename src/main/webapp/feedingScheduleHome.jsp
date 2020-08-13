@@ -34,16 +34,26 @@
 					<th class="text-center">Recurrence</th>
 					<th class="text-center">Food</th>
 					<th class="text-center">Notes</th>
+					<th class="text-center">Currently Assigned To:</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="feedingSchedule" items="${feedingSchedules}">
 					<tr>
-						<td><fmt:formatNumber value="${feedingSchedule.schedule_ID}" /></td>
-						<td><c:out value="${feedingSchedule.feeding_time}" /></td>
-						<td><c:out value="${feedingSchedule.recurrence}" /></td>
-						<td><c:out value="${feedingSchedule.food}" /></td>
-						<td><c:out value="${feedingSchedule.notes}" /></td>
+						<td><fmt:formatNumber value="${feedingSchedule.key.schedule_ID}" /></td>
+						<td><c:out value="${feedingSchedule.key.feeding_time}" /></td>
+						<td><c:out value="${feedingSchedule.key.recurrence}" /></td>
+						<td><c:out value="${feedingSchedule.key.food}" /></td>
+						<td><c:out value="${feedingSchedule.key.notes}" /></td>
+						<td colspan = "2">
+							<table>
+								<c:forEach var="animal" items="${feedingSchedule.value}">
+								<tr>
+									<td><c:out value="${animal.name} (${animal.taxSpecies})" /></td>
+								</tr>
+								</c:forEach>
+							</table>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

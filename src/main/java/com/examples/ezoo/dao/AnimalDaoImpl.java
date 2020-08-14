@@ -179,7 +179,7 @@ public class AnimalDaoImpl implements AnimalDAO {
 	
 	@Override
 	public List<Animal> getAnimalsWithSchedule(long scheduleID) {
-		Animal a = new Animal();
+		
 		List<Animal> animalList = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement stmt = null;
@@ -195,6 +195,7 @@ public class AnimalDaoImpl implements AnimalDAO {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
+				Animal a = new Animal();
 			
 				a.setAnimalID(rs.getLong("animalid"));
 				a.setName(rs.getString("name"));

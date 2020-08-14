@@ -31,7 +31,6 @@ public class FeedingScheduleServlet extends HttpServlet {
 		FeedingScheduleDAO dao = DAOUtilities.getFeedingScheduleDao();
 		List<FeedingSchedule> feedingSchedules = dao.getAllFeedingSchedules();
 		AnimalDAO animalDao = DAOUtilities.getAnimalDao();
-		List<Animal> animals = animalDao.getAllAnimals();
 		
 		
 		Map<FeedingSchedule, List<Animal>> mapFeedingSchedulesToAnimals = new HashMap<>();

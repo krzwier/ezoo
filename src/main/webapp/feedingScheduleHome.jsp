@@ -45,11 +45,11 @@
 						<td><c:out value="${feedingSchedule.key.recurrence}" /></td>
 						<td><c:out value="${feedingSchedule.key.food}" /></td>
 						<td><c:out value="${feedingSchedule.key.notes}" /></td>
-						<td colspan = "2">
-							<table>
+						<td>
+							<table align="center">
 								<c:forEach var="animal" items="${feedingSchedule.value}">
-								<tr>
-									<td><c:out value="${animal.name} (${animal.taxSpecies})" /></td>
+								<tr style="background-color: transparent;">
+									<td style="padding: 0;"><c:out value="${animal.name} (${animal.taxSpecies})" /></td>
 								</tr>
 								</c:forEach>
 							</table>

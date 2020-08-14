@@ -35,6 +35,7 @@
 					<th class="text-center">Food</th>
 					<th class="text-center">Notes</th>
 					<th class="text-center">Currently Assigned To:</th>
+					<th class="text-center">Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -53,6 +54,12 @@
 								</tr>
 								</c:forEach>
 							</table>
+						</td>
+						<td>
+							<form name="deleteFeedingScheduleForm" action="feedingSchedules" method='post'>
+								<input type="hidden" name="schedule_id" value="${feedingSchedule.key.schedule_ID}" />
+								<button type="submit" class="btn btn-primary">Delete</button>
+							</form>
 						</td>
 					</tr>
 				</c:forEach>

@@ -46,5 +46,29 @@ public class FeedingScheduleServlet extends HttpServlet {
 		request.getRequestDispatcher("feedingScheduleHome.jsp").forward(request, response);
 	}
 
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		FeedingScheduleDAO dao = DAOUtilities.getFeedingScheduleDao();
+		long schedule_id = Long.parseLong((String) req.getParameter("schedule_id"));
+		FeedingSchedule fs = dao.getFeedingSchedule(schedule_id);
+		try {
+			dao.deleteFeedingSchedule(fs);
+			req.getSession().setAttribute("message", "Feeding schedule " + schedule_id + " has been deleted.");
+			req.getSession().setAttribute("messageClass", "alert-success");
+			resp.sendRedirect("feedingSchedules");
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+			req.getSession().setAttribute("message", "There was a problem deleting the feeding schedule.");
+			req.getSession().setAttribute("messageClass", "alert-danger");
+
+			req.getRequestDispatcher("feedingScheduleHome.jsp").forward(req, resp);
+		}
+		
+	}
+
+	
 
 }

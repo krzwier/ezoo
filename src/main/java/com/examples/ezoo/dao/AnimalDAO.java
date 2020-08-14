@@ -30,5 +30,10 @@ public interface AnimalDAO {
 	 */
 	Animal getAnimal(long animalID);
 	
-	public List<Animal> getAnimalsWithSchedule(long scheduleID);
+	/**
+	 * Used to retrieve all animals with a given feeding schedule
+	 * @param scheduleID
+	 * @return
+	 */
+	List<Animal> getAnimalsWithSchedule(long scheduleID);
 }

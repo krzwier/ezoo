@@ -38,34 +38,6 @@ public class FeedingScheduleServlet extends HttpServlet {
 		for (FeedingSchedule fs : feedingSchedules) {
 			mapFeedingSchedulesToAnimals.put(fs, animalDao.getAnimalsWithSchedule(fs.getSchedule_ID()));
 		}
-		
-		/*
-		for (Animal a : animals) {
-			FeedingSchedule f;
-			try {
-				f = dao.getFeedingSchedule(a);
-				if (f != null) {
-					long scheduleID = f.getSchedule_ID();
-				}
-				if (mapFeedingScheduleIDToAnimal.containsKey(key))
-				
-				if (f != null) {
-					mapFeedingScheduleIDToAnimal.put(f.getSchedule_ID(), a);
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		
-		for (FeedingSchedule fs : feedingSchedules) {
-			List<Animal> animalList = new ArrayList<>();
-			mapFeedingScheduleIDToAnimal.get
-			mapFeedingSchedulesToAnimals.put(fs, animalList);
-		}
-		*/
-		//feedingSchedules.get(0).getSchedule_ID()
 
 		// Populate the list into a variable that will be stored in the session
 		request.getSession().setAttribute("feedingSchedules", mapFeedingSchedulesToAnimals);

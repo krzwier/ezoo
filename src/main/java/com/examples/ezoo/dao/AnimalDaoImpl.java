@@ -160,7 +160,6 @@ public class AnimalDaoImpl implements AnimalDAO {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
@@ -173,7 +172,6 @@ public class AnimalDaoImpl implements AnimalDAO {
 			}
 		}
 
-		// TODO Auto-generated method stub
 		return a;
 	}
 	

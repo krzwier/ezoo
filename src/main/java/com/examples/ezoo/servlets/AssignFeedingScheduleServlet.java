@@ -73,7 +73,7 @@ public class AssignFeedingScheduleServlet extends HttpServlet {
 			fsDAO.assignFeedingSchedule(a, fs);
 			request.getSession().setAttribute("message", "Feeding schedule successfully assigned");
 			request.getSession().setAttribute("messageClass", "alert-success");
-			response.sendRedirect("animalCare");
+			response.sendRedirect("feedingSchedules");
 		} catch (Exception e) {
 
 			e.printStackTrace();

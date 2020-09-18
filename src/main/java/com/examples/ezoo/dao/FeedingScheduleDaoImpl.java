@@ -64,6 +64,14 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 
 		try {
 			connection = DAOUtilities.getConnection();
+			
+			String sqlUpdate = "UPDATE animals SET feeding_schedule = NULL WHERE feeding_schedule = ?";
+			
+			stmt = connection.prepareStatement(sqlUpdate);
+			
+			stmt.setLong(1, feedingScheduleToDelete.getSchedule_ID());
+
+			success = stmt.executeUpdate();
 
 			if (feedingScheduleToDelete.getNotes() == null) {
 				// notes field is null

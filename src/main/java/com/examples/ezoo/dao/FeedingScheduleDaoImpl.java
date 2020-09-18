@@ -60,6 +60,7 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 
 		Connection connection = null;
 		PreparedStatement stmt = null;
+		PreparedStatement updateStmt = null;
 		int success = 0;
 
 		try {
@@ -67,11 +68,11 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 			
 			String sqlUpdate = "UPDATE animals SET feeding_schedule = NULL WHERE feeding_schedule = ?";
 			
-			stmt = connection.prepareStatement(sqlUpdate);
+			updateStmt = connection.prepareStatement(sqlUpdate);
 			
-			stmt.setLong(1, feedingScheduleToDelete.getSchedule_ID());
+			updateStmt.setLong(1, feedingScheduleToDelete.getSchedule_ID());
 
-			success = stmt.executeUpdate();
+			success = updateStmt.executeUpdate();
 
 			if (feedingScheduleToDelete.getNotes() == null) {
 				// notes field is null

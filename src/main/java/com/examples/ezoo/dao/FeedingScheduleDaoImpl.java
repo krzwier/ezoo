@@ -59,20 +59,39 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 	public void deleteFeedingSchedule(FeedingSchedule feedingScheduleToDelete) throws Exception {
 
 		Connection connection = null;
-		PreparedStatement stmt = null;
 		PreparedStatement updateStmt = null;
-		int success = 0;
+		int refsuccess = 0;
+
 
 		try {
 			connection = DAOUtilities.getConnection();
-			
+
 			String sqlUpdate = "UPDATE animals SET feeding_schedule = NULL WHERE feeding_schedule = ?";
-			
+
 			updateStmt = connection.prepareStatement(sqlUpdate);
-			
+
 			updateStmt.setLong(1, feedingScheduleToDelete.getSchedule_ID());
 
-			success = updateStmt.executeUpdate();
+			refsuccess = updateStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (updateStmt != null) {
+					updateStmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		connection = null;
+		PreparedStatement stmt = null;
+		int delsuccess = 0;
+
+		try {
+			connection = DAOUtilities.getConnection();
 
 			if (feedingScheduleToDelete.getNotes() == null) {
 				// notes field is null
@@ -85,7 +104,7 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 				stmt.setString(2, feedingScheduleToDelete.getFeeding_time());
 				stmt.setString(3, feedingScheduleToDelete.getRecurrence());
 				stmt.setString(4, feedingScheduleToDelete.getFood());
-				
+
 			} else {
 				// notes field is not null
 
@@ -105,10 +124,10 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 
 			}
 
-			success = stmt.executeUpdate();
+			delsuccess = stmt.executeUpdate();
 		} catch (
 
-		SQLException e) {
+				SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
@@ -121,7 +140,7 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			if (success == 0) {
+			if (delsuccess == 0) {
 				// then update didn't occur, throw an exception
 				throw new Exception("Delete feeding schedule failed:" + feedingScheduleToDelete);
 			}
@@ -180,40 +199,40 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 
 		FeedingSchedule fs = new FeedingSchedule();
 		boolean success = false;
-		
+
 		Connection connection = null;
 		PreparedStatement stmtGetFeedingScheduleID = null;
 		PreparedStatement stmtGetFeedingScheduleRecord = null;
-		
+
 		try {
 			connection = DAOUtilities.getConnection();
-			
+
 			String sqlGetFeedingScheduleID = "SELECT feeding_schedule FROM animals WHERE animalid = ?";
-			
+
 			stmtGetFeedingScheduleID = connection.prepareStatement(sqlGetFeedingScheduleID);
-			
+
 			stmtGetFeedingScheduleID.setLong(1,animal.getAnimalID());
-	
+
 
 			ResultSet rs = stmtGetFeedingScheduleID.executeQuery();
-			
+
 			if (rs.next()) {
 				// animal exists in database
 				Long feedingScheduleID = rs.getLong("feeding_schedule");
-				
+
 				if (feedingScheduleID != null) {
 					// animal has feeding schedule
 					String sqlGetFeedingScheduleRecord = "SELECT * FROM feeding_schedules WHERE schedule_id = ?";
-					
+
 					stmtGetFeedingScheduleRecord = connection.prepareStatement(sqlGetFeedingScheduleRecord);
-					
+
 					stmtGetFeedingScheduleRecord.setLong(1,feedingScheduleID);
-					
+
 					ResultSet rs2 = stmtGetFeedingScheduleRecord.executeQuery();
-					
+
 					if (rs2.next()) {
 						// feeding schedule exists in database
-						
+
 						fs.setSchedule_ID(rs2.getInt("schedule_id"));
 						fs.setFeeding_time(rs2.getString("feeding_time"));
 						fs.setRecurrence(rs2.getString("recurrence"));
@@ -223,13 +242,13 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 						//feeding schedule does not exist in database
 						fs = null;
 					}
-					
+
 				} 
 				success = true;
 			}
-			
+
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		} finally {
 			try {
@@ -250,7 +269,7 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 				throw new Exception("Could not retrieve feeding schedule:" + animal );
 			}
 		}
-		
+
 		return fs;
 
 	}
@@ -260,12 +279,12 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 		Connection connection = null;
 		PreparedStatement stmt = null;
 		PreparedStatement stmtGetFeedingScheduleRecord = null;
-		
+
 		int success = 0;
-		
+
 		try {
 			connection = DAOUtilities.getConnection();
-			
+
 			/*
 			 * // first check if feeding schedule exists in database
 			 * 
@@ -282,20 +301,20 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 			 * 
 			 * if (!rs.next()) { saveFeedingSchedule(feedingSchedule); }
 			 */
-			
-			
+
+
 			String sql = "UPDATE animals SET feeding_schedule = ? WHERE animalid = ?";
-			
+
 			stmt = connection.prepareStatement(sql);
-			
+
 			stmt.setLong(1, feedingSchedule.getSchedule_ID());
 			stmt.setLong(2,animal.getAnimalID());
 
 			success = stmt.executeUpdate();
-			
-			
+
+
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		} finally {
 			try {
@@ -324,22 +343,22 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 		Connection connection = null;
 		PreparedStatement stmt = null;
 		int success = 0;
-		
+
 		try {
 			connection = DAOUtilities.getConnection();
-			
+
 			String sql = "UPDATE animals SET feeding_schedule = NULL WHERE animalid = ?";
-			
+
 			stmt = connection.prepareStatement(sql);
-			
+
 			stmt.setLong(1,animal.getAnimalID());
-	
+
 
 			success = stmt.executeUpdate();
-			
-			
+
+
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		} finally {
 			try {
@@ -376,14 +395,14 @@ public class FeedingScheduleDaoImpl implements FeedingScheduleDAO {
 			stmt.setLong(1, schedule_id);
 
 			ResultSet rs = stmt.executeQuery();
-			
+
 			// note that on a PerparedStatement, you never pass the SQL string to the executeQuery method
 			// the call should be simply executeQuery() as above
-			
+
 			if (rs.next()) {
-				
+
 				// feeding schedule exists in database
-				
+
 				fs.setSchedule_ID(rs.getInt("schedule_id"));
 				fs.setFeeding_time(rs.getString("feeding_time"));
 				fs.setRecurrence(rs.getString("recurrence"));

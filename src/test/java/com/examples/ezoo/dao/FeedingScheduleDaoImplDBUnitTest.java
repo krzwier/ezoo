@@ -212,7 +212,7 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 	@Test
 	public void deleteFeedingSchedule_FeedingScheduleExistsInDatabaseAndNotesFieldIsNotNull_RecordDeleted()
 			throws Exception {
-		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("afterDelete2.xml");
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("animalsAfterDelete.xml");
 		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(inputStream);
 		ITable expectedTable = expectedDataSet.getTable("feeding_schedules");
 

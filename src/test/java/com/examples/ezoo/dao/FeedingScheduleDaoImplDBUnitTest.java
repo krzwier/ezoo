@@ -186,6 +186,28 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 		Assertion.assertEquals(expectedTable, actualTable);
 
 	}
+	
+	@Test
+	public void deleteFeedingSchedule_AnimalAssociatedWithFeedingSchedule_ReferenceDeletedinAnimalsTable()
+			throws Exception {
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("animalsAfterDelete.xml");
+		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(inputStream);
+		ITable expectedTable = expectedDataSet.getTable("animals");
+
+		FeedingSchedule fs = new FeedingSchedule(103, "1pm", "daily", "Backyard Basics",
+				"Helps chickens survive even though they prefer grubs and scratch.");
+
+		PowerMockito.mockStatic(DAOUtilities.class);
+		when(DAOUtilities.getConnection()).thenReturn(connection);
+
+		fsdi.deleteFeedingSchedule(fs);
+
+		IDataSet databaseDataSet = getConnection().createDataSet();
+		ITable actualTable = databaseDataSet.getTable("animals");
+
+		Assertion.assertEquals(expectedTable, actualTable);
+
+	}
 
 	@Test
 	public void deleteFeedingSchedule_FeedingScheduleExistsInDatabaseAndNotesFieldIsNotNull_RecordDeleted()

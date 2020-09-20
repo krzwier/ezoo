@@ -52,19 +52,6 @@ public class FeedingScheduleDaoImplDBUnitTest extends DataSourceBasedDBTestCase 
 		return DatabaseOperation.DELETE_ALL;
 	}
 	
-	/*
-	public void FeedingSheduleDaoImplDBUnitTest(String name) {
-		//super(name);
-		System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS, "org.h2.Driver");
-		System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, "jdbc:h2:mem:default");
-		System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, "sa");
-		System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, "sa");
-		System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_SCHEMA, "schema.sql");
-		
-	}
-	*/
-	
-	
 	@Override
 	protected DataSource getDataSource() {
 		JdbcDataSource dataSource = new JdbcDataSource();

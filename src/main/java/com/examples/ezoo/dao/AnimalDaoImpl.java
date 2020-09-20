@@ -119,6 +119,61 @@ public class AnimalDaoImpl implements AnimalDAO {
 		}
 
 	}
+	
+	@Override
+	public void editAnimal(Animal animal) throws Exception {
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		int success = 0;
+
+		try {
+			connection = DAOUtilities.getConnection();
+			String sql = "UPDATE animals SET name = ?, taxkingdom = ?, taxphylum = ?, "
+					+ "taxclass = ?, taxorder = ?, taxfamily = ?, taxgenus = ?, "
+					+ "taxspecies = ?, height = ?, weight = ?, type = ?, "
+					+ "healthstatus = ?, WHERE animalid = ?";
+
+			// Setup PreparedStatement
+			stmt = connection.prepareStatement(sql);
+
+			// Add parameters from animal into PreparedStatement
+			stmt.setString(1, animal.getName());
+
+			stmt.setString(2, animal.getTaxKingdom());
+			stmt.setString(3, animal.getTaxPhylum());
+			stmt.setString(4, animal.getTaxClass());
+			stmt.setString(5, animal.getTaxOrder());
+			stmt.setString(6, animal.getTaxFamily());
+			stmt.setString(7, animal.getTaxGenus());
+			stmt.setString(8, animal.getTaxSpecies());
+
+			stmt.setDouble(9, animal.getHeight());
+			stmt.setDouble(10, animal.getWeight());
+
+			stmt.setString(11, animal.getType());
+			stmt.setString(12, animal.getHealthStatus());
+			stmt.setLong(13, animal.getAnimalID());
+
+			success = stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (success == 0) {
+			// then update didn't occur, throw an exception
+			throw new Exception("Edit animal failed: " + animal);
+		}
+
+	}
 
 	@Override
 	public Animal getAnimal(long animalID) {

@@ -36,4 +36,11 @@ public interface AnimalDAO {
 	 * @return
 	 */
 	List<Animal> getAnimalsWithSchedule(long scheduleID);
+
+	/**
+	 * Used to change field values for an already existing animal
+	 * @param animal
+	 * @throws Exception
+	 */
+	void editAnimal(Animal animal) throws Exception;
 }

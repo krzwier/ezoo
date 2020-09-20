@@ -53,11 +53,14 @@
 					<li class="dropdown">
                         <a tabindex="-1" href="#" class="dropdown-toggle" data-toggle="dropdown">Animal Care<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                          <li><a href="animalCare">Home (Level 100)</a></li>
+                          <li><a href="animalCare">View All Animals</a></li>
+                          <li><a href="addAnimal">New Animal</a></li>
+                          <li><a href="editAnimal">Edit Animal</a></li>
                           <li class="divider"></li>
-                          <li><a href="addAnimal">Add Animal</a></li>
-                          <li><a href="feedingSchedules">Feeding Schedules</a></li>
-                          <li><a href="createFeedingSchedule">Add Feeding Schedule</a></li>
+                          <li><a href="feedingSchedules">View All Feeding Schedules</a></li>
+                          <li><a href="createFeedingSchedule">New Feeding Schedule</a></li>
+                          <li><a href="editFeedingSchedule">Edit Feeding Schedule</a></li>
+                          <li class="divider"></li>
                           <li><a href="assignFeedingSchedule">Assign Feeding Schedule</a></li>
                         </ul>
                     </li>

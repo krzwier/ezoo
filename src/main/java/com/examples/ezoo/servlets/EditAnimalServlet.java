@@ -2,6 +2,7 @@ package com.examples.ezoo.servlets;
 
 import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +19,7 @@ import com.examples.ezoo.model.Animal;
  */
 @WebServlet("/editAnimal")
 public class EditAnimalServlet extends HttpServlet {
-       
+
 	/**
 	 * 
 	 */
@@ -26,15 +27,23 @@ public class EditAnimalServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// Grab a list of Animals from the Database
+		AnimalDAO dao = DAOUtilities.getAnimalDao();
+		List<Animal> animals = dao.getAllAnimals();
+
+		// Populate the list into a variable that will be stored in the session
+		request.getSession().setAttribute("animals", animals);
+
 		request.getRequestDispatcher("editAnimal.jsp").forward(request, response);
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Get Parameters
 		//We MUST convert to a Long since parameters are always Strings
 		long id = Long.parseLong(request.getParameter("id"));
-		
+
 		String name = request.getParameter("name");
 
 		String kingdom = request.getParameter("kingdom");
@@ -46,12 +55,12 @@ public class EditAnimalServlet extends HttpServlet {
 		String species = request.getParameter("species");
 		String type = request.getParameter("type");
 		String healthStatus = request.getParameter("healthStatus");
-		
-		
+
+
 		//Since request parameters are ALWAYS Strings we will convert them to Double
 		double height = Double.parseDouble(request.getParameter("height"));
 		double weight = Double.parseDouble(request.getParameter("weight"));
-		
+
 		//Create an Animal object from the parameters
 		Animal animalToEdit = new Animal(
 				id, 
@@ -67,7 +76,7 @@ public class EditAnimalServlet extends HttpServlet {
 				weight,
 				type,
 				healthStatus);
-		
+
 		//Call DAO method
 		AnimalDAO dao = DAOUtilities.getAnimalDao();
 		try {
@@ -78,11 +87,11 @@ public class EditAnimalServlet extends HttpServlet {
 
 		}catch (Exception e){
 			e.printStackTrace();
-			
+
 			//change the message
 			request.getSession().setAttribute("message", "There was a problem editing the animal at this time");
 			request.getSession().setAttribute("messageClass", "alert-danger");
-			
+
 			request.getRequestDispatcher("editAnimal.jsp").forward(request, response);
 
 		}
